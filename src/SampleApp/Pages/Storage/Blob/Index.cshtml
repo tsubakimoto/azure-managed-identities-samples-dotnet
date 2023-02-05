@@ -1,0 +1,14 @@
+﻿@page
+@model SampleApp.Pages.Storage.Blob.IndexModel
+@{
+    ViewData["Title"] = "Blob List";
+}
+
+<h1>Blob names</h1>
+
+<ul>
+    @foreach (string name in Model.BlobNames)
+    {
+        <li>@name</li>
+    }
+</ul>
