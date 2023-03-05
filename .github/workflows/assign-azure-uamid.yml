@@ -1,0 +1,51 @@
+# https://learn.microsoft.com/en-us/azure/app-service/overview-managed-identity#add-a-user-assigned-identity
+
+name: Assign Azure User Assigned Managed Identity
+
+on:
+  workflow_dispatch:
+    inputs:
+      group:
+        description: Resource group name
+        type: text
+        default: rg-azure-managed-identities-samples
+        required: true
+      type:
+        description: Resource type
+        type: text
+        default: webapp
+        required: true
+      resource-name:
+        description: Resource name
+        type: text
+        default: myapp
+        required: true
+      mid-name:
+        description: Identity name
+        type: text
+        default: id-yuta-mid-samples
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  create-resource:
+    runs-on: ubuntu-latest
+    environment: azure
+    steps:
+      - name: Az CLI Login
+        uses: azure/login@v1
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Assign identity
+        run: |
+          az ${{ inputs.type }} identity assign \
+            --resource-group ${{ inputs.group }} \
+            --name ${{ inputs.resource-name }} \
+            --identities ${{ inputs.mid-name }}
+      - name: Az CLI Logout
+        run: az logout
