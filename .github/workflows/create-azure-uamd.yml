@@ -11,7 +11,7 @@ on:
 
 jobs:
   az-login:
-    uses: tsubakimoto/.github/blob/main/workflows/az-login.yml@main
+    uses: tsubakimoto/.github/workflows/az-login.yml@main
     secrets:
       tenant-id: ${{ secrets.AZURE_TENANT_ID }}
       client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -19,4 +19,4 @@ jobs:
       
   az-logout:
     needs: az-login
-    uses: tsubakimoto/.github/blob/main/workflows/az-logout.yml@main
+    uses: tsubakimoto/.github/workflows/az-logout.yml@main
