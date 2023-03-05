@@ -1,0 +1,22 @@
+name: Create Azure User Assigned Managed Identity
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Resource name
+        type: text
+        default: myidentity
+        required: true
+
+jobs:
+  az-login:
+    uses: tsubakimoto/.github/blob/main/workflows/az-login.yml@main
+    secrets:
+      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      
+  az-logout:
+    needs: az-login
+    uses: tsubakimoto/.github/blob/main/workflows/az-logout.yml@main
