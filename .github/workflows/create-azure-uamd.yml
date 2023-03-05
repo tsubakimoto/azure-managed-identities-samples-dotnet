@@ -3,6 +3,11 @@ name: Create Azure User Assigned Managed Identity
 on:
   workflow_dispatch:
     inputs:
+      group:
+        description: Resource group name
+        type: text
+        default: mygroup
+        required: true
       name:
         description: Resource name
         type: text
@@ -24,6 +29,7 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
+      - name: Create identity
+        run: az identity create --resource-group ${{ inputs.group }} --name ${{ inputs.name }}
       - name: Az CLI Logout
         run: az logout
