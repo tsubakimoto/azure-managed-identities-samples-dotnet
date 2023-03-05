@@ -46,6 +46,6 @@ jobs:
           az ${{ inputs.type }} identity assign \
             --resource-group ${{ inputs.group }} \
             --name ${{ inputs.resource-name }} \
-            --identities ${{ inputs.mid-name }}
+            --identities [system] ${{ inputs.mid-name }}
       - name: Az CLI Logout
         run: az logout
