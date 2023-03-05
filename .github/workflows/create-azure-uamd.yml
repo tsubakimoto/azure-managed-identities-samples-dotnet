@@ -14,13 +14,24 @@ permissions:
   contents: read
 
 jobs:
-  az-login:
-    uses: ./.github/workflows/az-login.yml
+#   az-login:
+#     uses: ./.github/workflows/az-login.yml
 #     secrets:
 #       tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 #       client-id: ${{ secrets.AZURE_CLIENT_ID }}
 #       subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      
+
+  az-login:
+    runs-on: ubuntu-latest
+    environment: azure
+    steps:
+      - name: Az CLI Login
+        uses: azure/login@v1
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
   az-logout:
     needs: az-login
     uses: ./.github/workflows/az-logout.yml
