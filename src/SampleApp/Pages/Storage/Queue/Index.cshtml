@@ -1,0 +1,14 @@
+﻿@page
+@model SampleApp.Pages.Storage.Queue.IndexModel
+@{
+    ViewData["Title"] = "Queue List";
+}
+
+<h1>Queue values</h1>
+
+<ul>
+    @foreach (string value in Model.QueueValues)
+    {
+        <li>@value</li>
+    }
+</ul>
