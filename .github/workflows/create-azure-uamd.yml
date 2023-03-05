@@ -1,22 +1,30 @@
-name: Create Azure User Assigned Managed Identity
+# https://docs.microsoft.com/en-us/azure/developer/github/connect-from-azure
+
+name: Az CLI Login using OIDC
 
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: Resource name
-        type: text
-        default: myidentity
+  workflow_call:
+    secrets:
+      AZURE_TENANT_ID:
         required: true
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   az-login:
-    uses: tsubakimoto/.github/workflows/az-login.yml@main
-    secrets:
-      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-      client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      
-  az-logout:
-    needs: az-login
-    uses: tsubakimoto/.github/workflows/az-logout.yml@main
+    runs-on: ubuntu-latest
+    environment: azure
+    steps:
+      - name: Az CLI Login
+        uses: azure/login@v1
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
