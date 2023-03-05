@@ -7,3 +7,6 @@
 
 ### Blob
 - [Azure Storage samples using .NET | Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-samples-dotnet)
+
+## Web Apps
+- [Managed identities - Azure App Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=portal%2Chttp)
