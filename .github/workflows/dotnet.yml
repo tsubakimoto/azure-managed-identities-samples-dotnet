@@ -14,6 +14,13 @@ on:
       - src/**/*
   workflow_dispatch:
 
+env:
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
 
@@ -29,3 +36,41 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+
+    - name: Publish
+      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: .net-app
+        path: ${{ env.DOTNET_ROOT }}/myapp
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: azure
+    needs: build
+    
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+          
+      - name: Az CLI Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: 'Run Azure webapp deploy action'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          slot-name: 'Production'
+          package: .
+
+      - name: Az CLI Logout
+        run: az logout
