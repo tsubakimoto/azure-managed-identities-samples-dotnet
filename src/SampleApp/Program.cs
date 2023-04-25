@@ -1,7 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<SalesLTContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SalesLTContext") ?? throw new InvalidOperationException("Connection string 'SalesLTContext' not found.")));
 builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
