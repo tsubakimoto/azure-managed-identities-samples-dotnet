@@ -20,7 +20,10 @@ dotnet user-secrets set Azure:Storage:AccountName <put-your-storage-name>
 ```
 
 ### Blob
-- [Azure Storage samples using .NET | Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-samples-dotnet)
+- [Azure Storage samples using .NET | Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-samples-dotnet#blob-samples)
+
+### Queue
+- [Azure Storage samples using .NET | Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-samples-dotnet#queue-samples)
 
 ## Web Apps
 - [Managed identities - Azure App Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=portal%2Chttp)
