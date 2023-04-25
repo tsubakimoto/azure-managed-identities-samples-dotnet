@@ -44,7 +44,7 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Publish
-      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp SampleApp
+      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp SampleApp.csproj
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
