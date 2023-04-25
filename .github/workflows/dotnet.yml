@@ -31,8 +31,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '6.0.x'
-        # global-json-file: global.json
+        global-json-file: global.json
 
     - name: Publish
       run: dotnet publish --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp
