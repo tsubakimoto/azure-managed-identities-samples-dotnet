@@ -21,11 +21,11 @@ dotnet user-secrets set Azure:Storage:AccountName <put-your-storage-name>
 
 ### Blob
 - [Azure Storage samples using .NET | Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-samples-dotnet#blob-samples)
-- [Azure built-in roles - Azure RBAC | Microsoft Learn](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
+- [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
 
 ### Queue
 - [Azure Storage samples using .NET | Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-samples-dotnet#queue-samples)
-- [Azure built-in roles - Azure RBAC | Microsoft Learn](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-queue-data-contributor)
+- [Storage Queue Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-queue-data-contributor)
 
 ## Web Apps
 - [Managed identities - Azure App Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=portal%2Chttp)
