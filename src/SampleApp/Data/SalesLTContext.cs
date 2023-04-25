@@ -8,4 +8,9 @@ public class SalesLTContext : DbContext
     }
 
     public DbSet<ProductModel> ProductModel { get; set; } = default!;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("SalesLT");
+    }
 }
