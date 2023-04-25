@@ -24,9 +24,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'src/SampleApp'
 
     steps:
     - uses: actions/checkout@v3
@@ -37,14 +34,8 @@ jobs:
         dotnet-version: '6.0.x'
         # global-json-file: global.json
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build
-      run: dotnet build --no-restore
-
     - name: Publish
-      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp SampleApp.csproj
+      run: dotnet publish --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
