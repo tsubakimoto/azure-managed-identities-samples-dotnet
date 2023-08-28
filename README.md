@@ -15,8 +15,11 @@ az account set -s <put-your-azure-subscription-id>
 ## Storage
 
 ```sh
+GROUP=<put-your-resource-group-name>
+STORAGE_ACCOUNT_NAME=$(az storage account list --query "[0].name" -g $GROUP --output tsv)
+
 cd src/SampleApp
-dotnet user-secrets set Azure:Storage:AccountName <put-your-storage-name>
+dotnet user-secrets set Azure:Storage:AccountName $STORAGE_ACCOUNT_NAME
 ```
 
 ### Blob
